@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleALinkedListDemo
+namespace LinkedListDemo
 {
     class Program
     {
@@ -13,12 +13,24 @@ namespace ConsoleALinkedListDemo
             LinkedList linkedList = new LinkedList();
             linkedList.head = null;
             int[] arr = { 5, 7, 11, 3 };
-            for(int i=0; i< arr.Length; i++)
+
+            //LinkList Creation
+            Console.WriteLine("LinkList Creation============");
+            for (int i=0; i< arr.Length; i++)
             {
                 linkedList.head= linkedList.CreateNode(linkedList.head, arr[i]);
                 linkedList.Print(linkedList.head);
             }
 
+            //LinkList InsertAtPosition
+            Console.WriteLine("LinkList InsertAtPosition============");
+            linkedList.head = linkedList.InsertAtPosition(linkedList.head, 3, 111);
+            linkedList.Print(linkedList.head);
+
+            // reverse a list using iteration
+            Console.WriteLine("reverse a list using iteration============");
+            linkedList.head = linkedList.ReverseListIteration(linkedList.head);
+            linkedList.Print(linkedList.head);
             Console.ReadLine();
         }
     }
@@ -32,6 +44,37 @@ namespace ConsoleALinkedListDemo
             newNode.data = data;
             newNode.next = head;
             head = newNode;
+            return head;
+        }
+
+        public Node ReverseListIteration(Node head)
+        {
+            Node current = head;
+            Node prev = null;
+            Node next = null;
+            while(current !=null)
+            {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            head = prev;
+            return head;
+        }
+
+        public Node InsertAtPosition(Node head, int n, int data)
+        {
+            Node temp = head;
+            for(int i=0; i < n-2; i++)
+            {
+                temp = temp.next;
+            }
+
+            Node newNode = new Node();
+            newNode.data = data;
+            newNode.next = temp.next;
+            temp.next = newNode;
             return head;
         }
         public void Print(Node head)
