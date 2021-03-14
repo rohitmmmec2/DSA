@@ -27,6 +27,23 @@ namespace LinkedListDemo
             linkedList.head = linkedList.InsertAtPosition(linkedList.head, 3, 111);
             linkedList.Print(linkedList.head);
 
+            //LinkList PrintRecursiveForwardDirection
+            Console.WriteLine("LinkList Print Recursive Forward Direction============");
+            Console.WriteLine("Linked List:");
+            linkedList.PrintRecursiveForwardDirection(linkedList.head);
+            Console.WriteLine("\n");
+
+            //LinkList PrintRecursiveReverseDirection
+            Console.WriteLine("LinkList Print Recursive Reverse Direction============");
+            Console.WriteLine("Linked List:");
+            linkedList.PrintRecursiveReverseDirection(linkedList.head);
+            Console.WriteLine("\n");
+
+            // reverse a list using recursion
+            Console.WriteLine("reverse a list using recursion============");
+            linkedList.ReverseListRecursive(ref linkedList.head, linkedList.head);
+            linkedList.Print(linkedList.head);
+
             // reverse a list using iteration
             Console.WriteLine("reverse a list using iteration============");
             linkedList.head = linkedList.ReverseListIteration(linkedList.head);
@@ -46,7 +63,6 @@ namespace LinkedListDemo
             head = newNode;
             return head;
         }
-
         public Node ReverseListIteration(Node head)
         {
             Node current = head;
@@ -63,6 +79,20 @@ namespace LinkedListDemo
             return head;
         }
 
+        public void ReverseListRecursive(ref Node head, Node p)
+        {
+            if(p.next==null)
+            {
+                head = p;
+                return;
+            }
+
+            ReverseListRecursive(ref head, p.next);
+            Node q = p.next;
+            q.next = p;
+            p.next = null;
+        }
+
         public Node InsertAtPosition(Node head, int n, int data)
         {
             Node temp = head;
@@ -76,6 +106,22 @@ namespace LinkedListDemo
             newNode.next = temp.next;
             temp.next = newNode;
             return head;
+        }
+
+        public void PrintRecursiveForwardDirection(Node head)
+        {
+            if (head == null)
+                return;
+            Console.Write(head.data + " ");
+            PrintRecursiveForwardDirection(head.next);
+        }
+
+        public void PrintRecursiveReverseDirection(Node head)
+        {
+            if (head == null)
+                return;
+            PrintRecursiveReverseDirection(head.next);
+            Console.Write(head.data + " ");
         }
         public void Print(Node head)
         {
