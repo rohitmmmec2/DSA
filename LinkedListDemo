@@ -12,19 +12,24 @@ namespace LinkedListDemo
         {
             LinkedList linkedList = new LinkedList();
             linkedList.head = null;
-            int[] arr = { 5, 7, 11, 3 };
+            int[] arr = { 1,2,3,4,5,6,7 };
 
             //LinkList Creation
-            Console.WriteLine("LinkList Creation============");
+            Console.WriteLine("LinkList Creation @ beginning============");
             for (int i=0; i< arr.Length; i++)
             {
                 linkedList.head= linkedList.CreateNode(linkedList.head, arr[i]);
-                linkedList.Print(linkedList.head);
             }
+            linkedList.Print(linkedList.head);
 
             //LinkList InsertAtPosition
             Console.WriteLine("LinkList InsertAtPosition============");
-            linkedList.head = linkedList.InsertAtPosition(linkedList.head, 3, 111);
+            linkedList.head = linkedList.InsertAtPosition(linkedList.head, 3, 8);
+            linkedList.Print(linkedList.head);
+
+            //LinkList InsertToEnd
+            Console.WriteLine("LinkList InsertToEnd============");
+            linkedList.head = linkedList.InsertToEnd(linkedList.head, 9);
             linkedList.Print(linkedList.head);
 
             //LinkList PrintRecursiveForwardDirection
@@ -38,6 +43,16 @@ namespace LinkedListDemo
             Console.WriteLine("Linked List:");
             linkedList.PrintRecursiveReverseDirection(linkedList.head);
             Console.WriteLine("\n");
+
+            //LinkList DeleteAtBeginning
+            Console.WriteLine("LinkList DeleteAtBeginning============");
+            linkedList.head = linkedList.DeleteAtBeginning(linkedList.head);
+            linkedList.Print(linkedList.head);
+
+            //LinkList DeleteAtEnd
+            Console.WriteLine("LinkList DeleteAtEnd============");
+            linkedList.head = linkedList.DeleteAtEnd(linkedList.head);
+            linkedList.Print(linkedList.head);
 
             // reverse a list using recursion
             Console.WriteLine("reverse a list using recursion============");
@@ -57,8 +72,7 @@ namespace LinkedListDemo
         public Node head;
         public Node CreateNode(Node head, int data)
         {
-            Node newNode = new Node();
-            newNode.data = data;
+            Node newNode = new Node(data);
             newNode.next = head;
             head = newNode;
             return head;
@@ -101,12 +115,41 @@ namespace LinkedListDemo
                 temp = temp.next;
             }
 
-            Node newNode = new Node();
-            newNode.data = data;
+            Node newNode = new Node(data);
             newNode.next = temp.next;
             temp.next = newNode;
             return head;
         }
+
+        public Node InsertToEnd(Node head, int data)
+        {
+            Node temp = head;
+            while(temp.next !=null)
+            {
+                temp = temp.next;
+            }
+
+            Node newNode = new Node(data);
+            temp.next = newNode;
+            return head;
+        }
+        public Node DeleteAtBeginning(Node head)
+        {
+            head = head.next;
+            return head;
+        }
+
+        public Node DeleteAtEnd(Node head)
+        {
+            Node temp = head;
+            while (temp.next.next != null)
+            {
+                temp = temp.next;
+            }
+            temp.next = null;
+            return head;
+        }
+
 
         public void PrintRecursiveForwardDirection(Node head)
         {
@@ -141,5 +184,10 @@ namespace LinkedListDemo
     {
         public int data;
         public Node next;
+        public Node(int data)
+        {
+            this.data = data;
+            this.next = null;
+        }
     }
 }
