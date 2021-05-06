@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Queue queue = new Queue();
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+            int data = queue.Dequeue();
+            Console.Read();
+        }
+    }
+
+    public class Queue
+    {
+        int front;
+        int rear;
+        int[] array = new int[5];
+        public Queue()
+        {
+            front = rear = -1;
+        }
+
+        public void Enqueue(int data)
+        {
+            if(ISEmpty())
+            {
+                front = 0;
+            }
+            array[++rear] = data;
+        }
+
+        public int Dequeue()
+        {
+            int data = array[front];
+            front++;
+            return data;
+
+        }
+
+        public bool ISEmpty()
+        {
+            return (front == -1 && rear == -1 ? true : false);
+        }
+
+    }
+}
