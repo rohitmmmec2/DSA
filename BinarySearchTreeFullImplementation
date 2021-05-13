@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BinarySearchTreeFullImplementation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BSTree bst = new BSTree();
+            bst.root= bst.Insert(bst.root, 15);
+            bst.root = bst.Insert(bst.root, 20);
+            bst.root = bst.Insert(bst.root, 10);
+            bst.root = bst.Insert(bst.root, 8);
+            bst.root = bst.Insert(bst.root, 12);
+            bst.root = bst.Insert(bst.root, 25);
+            bst.root = bst.Insert(bst.root, 17);
+            bool found = bst.Search(bst.root, 12);
+            Console.WriteLine("search for key = " + 12 + " " + (found ? "found" : "not found"));
+            found = bst.Search(bst.root, 13);
+            Console.WriteLine("search for key = " + 13 + " " + (found ? "found" : "not found"));
+
+            Console.Read();
+        }
+    }
+
+
+    public class BSTree
+    {
+        public Node root;
+        public BSTree()
+        {
+            this.root = null;
+        }
+
+        public Node Insert(Node parent, int data)
+        {
+            if (parent == null)
+            {
+                parent = new Node(data);
+            }
+           else if(parent.data > data)
+            {
+                parent.left = Insert(parent.left, data);
+            }
+            else
+            {
+                parent.right = Insert(parent.right, data);
+            }
+
+            return parent;
+        }
+
+        public bool Search(Node parent, int key)
+        {
+            if(parent == null)
+            {
+                return false;
+            }
+            else if (parent.data == key)
+            {
+                return true;
+            }
+            else if (key <= parent.data)
+            {
+                return Search(parent.left, key);
+            }
+            else
+            {
+               return Search(parent.right, key);
+            }
+        }
+    }
+
+    public class Node
+    {
+        public int data;
+        public Node left;
+        public Node right;
+        public Node(int data)
+        {
+            this.data = data;
+            this.left = this.right = null;
+        }
+    }
+}
