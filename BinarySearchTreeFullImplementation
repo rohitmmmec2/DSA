@@ -18,10 +18,17 @@ namespace BinarySearchTreeFullImplementation
             bst.root = bst.Insert(bst.root, 12);
             bst.root = bst.Insert(bst.root, 25);
             bst.root = bst.Insert(bst.root, 17);
+
             bool found = bst.Search(bst.root, 12);
             Console.WriteLine("search for key = " + 12 + " " + (found ? "found" : "not found"));
             found = bst.Search(bst.root, 13);
-            Console.WriteLine("search for key = " + 13 + " " + (found ? "found" : "not found"));
+            Console.WriteLine("search for key = " + 13 + " " + (found ? "found" : "not found")+"\n");
+
+            Console.WriteLine("FindMinIterrative = " + bst.FindMinIterrative(bst.root));
+            Console.WriteLine("FindMaxIterrative = " + bst.FindMaxIterrative(bst.root)+"\n");
+
+            Console.WriteLine("FindMinRecursive = " + bst.FindMinRecursive(bst.root));
+            Console.WriteLine("FindMaxRecursive = " + bst.FindMaxRecursive(bst.root)+"\n");
 
             Console.Read();
         }
@@ -72,6 +79,64 @@ namespace BinarySearchTreeFullImplementation
             {
                return Search(parent.right, key);
             }
+        }
+
+        public int FindMinIterrative(Node Parent)
+        {
+            if(Parent == null)
+            {
+                return -1;
+            }
+
+            while(Parent.left != null)
+            {
+                Parent = Parent.left;
+            }
+
+            return Parent.data;
+        }
+
+        public int FindMaxIterrative(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return -1;
+            }
+
+            while (Parent.right != null)
+            {
+                Parent = Parent.right;
+            }
+
+            return Parent.data;
+        }
+
+        public int FindMinRecursive(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return -1;
+            }
+
+            if(Parent.left != null)
+            {
+                return FindMinRecursive(Parent.left);
+            }
+            return Parent.data;
+        }
+
+        public int FindMaxRecursive(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return -1;
+            }
+
+            if (Parent.left != null)
+            {
+                return FindMaxRecursive(Parent.right);
+            }
+            return Parent.data;
         }
     }
 
