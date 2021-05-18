@@ -18,17 +18,35 @@ namespace BinarySearchTreeFullImplementation
             bst.root = bst.Insert(bst.root, 12);
             bst.root = bst.Insert(bst.root, 25);
             bst.root = bst.Insert(bst.root, 17);
+            //bst.root = bst.Insert(bst.root, 11);
 
+
+            Console.WriteLine("Searching.................................................... ");
             bool found = bst.Search(bst.root, 12);
             Console.WriteLine("search for key = " + 12 + " " + (found ? "found" : "not found"));
             found = bst.Search(bst.root, 13);
             Console.WriteLine("search for key = " + 13 + " " + (found ? "found" : "not found")+"\n");
 
+            Console.WriteLine("Find Min Max.................................................... ");
             Console.WriteLine("FindMinIterrative = " + bst.FindMinIterrative(bst.root));
             Console.WriteLine("FindMaxIterrative = " + bst.FindMaxIterrative(bst.root)+"\n");
 
             Console.WriteLine("FindMinRecursive = " + bst.FindMinRecursive(bst.root));
             Console.WriteLine("FindMaxRecursive = " + bst.FindMaxRecursive(bst.root)+"\n");
+
+            Console.WriteLine("Find Height.................................................... ");
+            Console.WriteLine("Find Height = " + bst.FindHeight(bst.root) + "\n");
+            bst.root = bst.Insert(bst.root, 11);
+            Console.WriteLine("FindHeight = " + bst.FindHeight(bst.root) + "\n");
+
+            Console.WriteLine("Tree Traversal.................................................... ");
+            Console.Write("In Order Traversal = ");
+            bst.InOrderTraversal(bst.root);
+            Console.Write("\nPre Order Traversal = ");
+            bst.PreOrderTraversal(bst.root);
+            Console.Write("\nPost Order Traversal = ");
+            bst.PostOrderTraversal(bst.root);
+
 
             Console.Read();
         }
@@ -137,6 +155,52 @@ namespace BinarySearchTreeFullImplementation
                 return FindMaxRecursive(Parent.right);
             }
             return Parent.data;
+        }
+
+        public int FindHeight(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return -1;
+            }
+
+            return 1 + Math.Max(FindHeight(Parent.left), FindHeight(Parent.right));
+        }
+
+        public void InOrderTraversal(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return;
+            }
+
+           InOrderTraversal(Parent.left);
+           Console.Write(Parent.data+" ");
+           InOrderTraversal(Parent.right);
+        }
+
+        public void PreOrderTraversal(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return;
+            }
+
+            Console.Write(Parent.data + " ");
+            PreOrderTraversal(Parent.left);
+            PreOrderTraversal(Parent.right);
+        }
+
+        public void PostOrderTraversal(Node Parent)
+        {
+            if (Parent == null)
+            {
+                return;
+            }
+
+            PostOrderTraversal(Parent.left);
+            PostOrderTraversal(Parent.right);
+            Console.Write(Parent.data + " ");
         }
     }
 
